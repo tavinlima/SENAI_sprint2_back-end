@@ -1,0 +1,101 @@
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Senai.Rental.WebApi.Domains;
+using Senai.Rental.WebApi.Interfaces;
+using Senai.Rental.WebApi.Repositories;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Senai.Rental.WebApi.Controllers
+{
+    [Produces("application/json")]
+
+    //Define que a rota de uma requisição será no formato domino/api/nomeController.
+    // ex: http://localhost:5000/api/clientes
+    [Route("api/[controller]")]
+    [ApiController]
+    public class ClientesController : ControllerBase
+    {
+        private IClienteRepository _clienteRepository { get; set; }
+        public ClientesController()
+        {
+            _clienteRepository = new ClienteRepository();
+        }
+
+        [HttpPost]
+        public IActionResult Cadastrar(ClienteDomain novoCliente)
+        {
+            _clienteRepository.Cadastrar(novoCliente);
+
+            return StatusCode(201);
+        }
+
+        [HttpGet]
+        public IActionResult Listar()
+        {
+            List<ClienteDomain> listaClientes = _clienteRepository.ListarTodos();
+
+            return Ok(listaClientes);
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult Buscar(int id)
+        {
+            ClienteDomain clienteBuscado = _clienteRepository.BuscarPorId(id);
+
+            if (clienteBuscado == null)
+            {
+                return NotFound("Nenhum gênero foi encontrado");
+            }
+            return Ok(clienteBuscado);
+        }
+
+        [HttpPatch]
+        public IActionResult Atualizar(ClienteDomain clienteAtualizado)
+        {
+            if (clienteAtualizado.nomeCliente == null || clienteAtualizado.idCliente <= 0 || clienteAtualizado.sobrenomeCliente == null || clienteAtualizado.CNH == null)
+            {
+                return BadRequest(
+                    new
+                    {
+                        mensagem = "Dados não informados",
+                    }
+                    );
+            }
+
+            ClienteDomain clienteBuscado = _clienteRepository.BuscarPorId(clienteAtualizado.idCliente);
+
+            if (clienteBuscado != null)
+            {
+                try
+                {
+                    _clienteRepository.AtualizarCliente(clienteAtualizado);
+
+                    return NoContent();
+                }
+                catch (Exception erro)
+                {
+                    return BadRequest(erro);
+                }
+            }
+
+            return NotFound(
+                new
+                {
+                    mensagem = "Cliente não encontrado",
+                    errorStatus = true
+                }
+                );
+        }
+
+        [HttpDelete("deletar/{id}")]
+        public IActionResult Deletar(int id)
+        {
+            _clienteRepository.Deletar(id);
+
+            return NoContent();
+        }
+    }
+}

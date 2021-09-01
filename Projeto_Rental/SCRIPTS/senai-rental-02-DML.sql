@@ -1,0 +1,35 @@
+-- DML
+
+USE T_Rental;
+GO
+
+INSERT INTO EMPRESA (nomeEmpresa)
+VALUES ('QBEE'), ('LOCALIZA'), ('BRASILATA');
+GO
+
+INSERT INTO MARCA (nomeMarca)
+VALUES ('TOYOTA'), ('HONDA'), ('CHEVROLET');
+GO
+
+INSERT INTO CLIENTE (nomeCliente, sobrenomeCliente, CNH)
+VALUES ('EDSON', 'LIMA', 000000000000), ('KENO', 'MARLEY', 111111111111), ('SILVANA', 'OLIVEIRA', 222222222222), ('FERN', 'MERTENS', 444444444444);
+GO
+
+INSERT INTO MODELO (idMarca, nomeModelo)
+VALUES (1, 'COROLLA'), (1,'ETIOS'), (2, 'FIAT');
+GO
+
+INSERT INTO VEICULO (idEmpresa, idModelo, Placa)
+VALUES (1, 1, '656'), (3, 2, '565');
+GO
+
+INSERT INTO ALUGUEL (idVeiculo, idCliente, dataEmpresetimo, dataDevolucao)
+VALUES (1, 3, '2021-05-19', '2021-05-21'), (2, 1, '2021-07-24', '2021-07-28'), (1, 2, '2021-12-29', '2021-01-29');
+GO
+
+/*
+UPDATE CLIENTE
+SET CNH = 101010101010
+WHERE idCliente = 1;
+GO
+*/
