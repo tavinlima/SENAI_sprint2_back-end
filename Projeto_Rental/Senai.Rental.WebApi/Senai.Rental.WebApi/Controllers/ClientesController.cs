@@ -47,7 +47,7 @@ namespace Senai.Rental.WebApi.Controllers
 
             if (clienteBuscado == null)
             {
-                return NotFound("Nenhum gênero foi encontrado");
+                return NotFound("Nenhum cliente foi encontrado");
             }
             return Ok(clienteBuscado);
         }
@@ -93,9 +93,24 @@ namespace Senai.Rental.WebApi.Controllers
         [HttpDelete("deletar/{id}")]
         public IActionResult Deletar(int id)
         {
-            _clienteRepository.Deletar(id);
+            ClienteDomain clienteBuscado = _clienteRepository.BuscarPorId(id);
 
-            return NoContent();
+            if (clienteBuscado != null)
+            {
+                try
+                {
+                    _clienteRepository.Deletar(id);
+                }
+                catch (Exception erro)
+                {
+
+                    return BadRequest(erro);
+                }
+
+                return NoContent();
+            }
+
+            return NotFound("Nenhum cliente foi encontrado para ser deletado");
         }
     }
 }
