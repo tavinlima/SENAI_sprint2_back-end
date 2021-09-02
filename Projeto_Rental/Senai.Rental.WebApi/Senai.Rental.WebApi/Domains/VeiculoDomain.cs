@@ -14,5 +14,7 @@ namespace Senai.Rental.WebApi.Domains
         public int idEmpresa { get; set; }
         public int idModelo { get; set; }
         public string Placa { get; set; }
+        public ModeloDomain modelo { get; set; }
+        public EmpresaDomain empresa { get; set; }
     }
 }
