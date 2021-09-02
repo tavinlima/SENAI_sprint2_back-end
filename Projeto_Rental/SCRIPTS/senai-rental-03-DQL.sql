@@ -23,4 +23,14 @@ INNER JOIN MODELO
 ON ALUGUEL.idVeiculo = MODELO.idModelo
 WHERE nomeCliente = 'EDSON'
 
-SELECT idCliente, nomeCliente, sobrenomeCliente, CNH FROM CLIENTE
+SELECT idCliente, nomeCliente, sobrenomeCliente, CNH FROM CLIENTE; 
+GO
+
+SELECT idAluguel, idVeiculo, dataEmpresetimo, dataDevolucao, nomeCliente, nomeModelo, nomeMarca 
+FROM ALUGUEL
+INNER JOIN CLIENTE
+ON ALUGUEL.idCliente = CLIENTE.idCliente
+LEFT JOIN MODELO
+ON ALUGUEL.idVeiculo = MODELO.idModelo
+LEFT JOIN MARCA
+ON MODELO.idMarca = MARCA.idMarca

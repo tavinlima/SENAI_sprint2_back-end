@@ -55,7 +55,7 @@ namespace Senai.Rental.WebApi.Controllers
         [HttpPut]
         public IActionResult AtualizarVeiculo(VeiculoDomain veiculoAtualizado)
         {
-            if (veiculoAtualizado.idVeiculo <= 0 || veiculoAtualizado.idEmpresa <= 0 || veiculoAtualizado.idModelo <= 0 || veiculoAtualizado.Placa != null)
+            if (veiculoAtualizado.idVeiculo <= 0 || veiculoAtualizado.idEmpresa <= 0 || veiculoAtualizado.idModelo <= 0 || veiculoAtualizado.Placa == null)
             {
                 return BadRequest(
                     new
