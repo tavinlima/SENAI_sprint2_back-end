@@ -27,7 +27,7 @@ namespace Senai.Rental.WebApi.Interfaces
         /// Atualiza um veiculo existente
         /// </summary>
         /// <param name="veiculoAtualizado">Objeto veiculoAtualizado com os novos dados atualizados</param>
-        void Atualizar(VeiculoDomain veiculoAtualizado);
+        void AtualizarVeiculo(VeiculoDomain veiculoAtualizado);
 
         /// <summary>
         /// Busca um veiculo por meio do seu ID

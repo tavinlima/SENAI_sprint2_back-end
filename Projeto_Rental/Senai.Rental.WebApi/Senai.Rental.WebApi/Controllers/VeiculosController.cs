@@ -24,6 +24,14 @@ namespace Senai.Rental.WebApi.Controllers
             _veiculoRepository = new VeiculoRepository();
         }
 
+        [HttpPost]
+        public IActionResult Cadastrar(VeiculoDomain novoVeiculo)
+        {
+            _veiculoRepository.Cadastrar(novoVeiculo);
+
+            return StatusCode(201);
+        }
+
         [HttpGet]
         public IActionResult Listar()
         {
@@ -32,5 +40,73 @@ namespace Senai.Rental.WebApi.Controllers
             return Ok(listaVeiculos);
         }
 
+        [HttpGet("{id}")]
+        public IActionResult BuscarVeiculo(int id)
+        {
+            VeiculoDomain veiculoBuscado = _veiculoRepository.BuscarPorId(id);
+
+            if (veiculoBuscado != null)
+            {
+                return Ok(veiculoBuscado);
+            }
+            return NotFound($"Nenhum veículo com o id {id} foi encontrado");
+        }
+
+        [HttpPut]
+        public IActionResult AtualizarVeiculo(VeiculoDomain veiculoAtualizado)
+        {
+            if (veiculoAtualizado.idVeiculo <= 0 || veiculoAtualizado.idEmpresa <= 0 || veiculoAtualizado.idModelo <= 0 || veiculoAtualizado.Placa != null)
+            {
+                return BadRequest(
+                    new
+                    {
+                        mensagem = "Dados não informados"
+                    }
+                    ); ;
+            }
+                VeiculoDomain veiculoBuscado = _veiculoRepository.BuscarPorId(veiculoAtualizado.idVeiculo);
+
+                if(veiculoBuscado != null)
+                {
+                    try
+                    {
+                        _veiculoRepository.AtualizarVeiculo(veiculoAtualizado);
+
+                        return NoContent();
+                    }
+                    catch (Exception erro)
+                    {
+                        return BadRequest(erro);
+                    }
+                }
+
+                return NotFound(
+                    new
+                    {
+                        mensagem = "Veículo não encontrado",
+                        errorStatus = true
+                    }
+                    );
+        }
+
+        [HttpDelete("excluir/{id}")]
+        public IActionResult DeletarVeiculo(int id)
+        {
+            VeiculoDomain veiculoBuscado = _veiculoRepository.BuscarPorId(id);
+
+            if (veiculoBuscado != null)
+            {
+                try
+                {
+                    _veiculoRepository.Deletar(id);
+                }
+                catch (Exception codErro)
+                {
+                    return BadRequest(codErro);
+                }
+                return NoContent();
+            }
+            return NotFound($"Nenhum veiculo com o id {id} foi encontrado para ser deletado");
+        }
     }
 }

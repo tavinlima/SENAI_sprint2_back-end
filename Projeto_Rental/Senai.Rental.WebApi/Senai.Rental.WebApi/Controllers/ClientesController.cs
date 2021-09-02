@@ -52,7 +52,7 @@ namespace Senai.Rental.WebApi.Controllers
             return Ok(clienteBuscado);
         }
 
-        [HttpPatch]
+        [HttpPut]
         public IActionResult Atualizar(ClienteDomain clienteAtualizado)
         {
             if (clienteAtualizado.nomeCliente == null || clienteAtualizado.idCliente <= 0 || clienteAtualizado.sobrenomeCliente == null || clienteAtualizado.CNH == null)
