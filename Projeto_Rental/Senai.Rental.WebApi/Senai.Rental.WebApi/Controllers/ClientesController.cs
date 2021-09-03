@@ -27,17 +27,35 @@ namespace Senai.Rental.WebApi.Controllers
         [HttpPost]
         public IActionResult Cadastrar(ClienteDomain novoCliente)
         {
-            _clienteRepository.Cadastrar(novoCliente);
+            try
+            {
+                _clienteRepository.Cadastrar(novoCliente);
 
-            return StatusCode(201);
+                return StatusCode(201);
+            }
+            catch (Exception erro)
+            {
+
+                return BadRequest(erro);
+            }
+            
         }
 
         [HttpGet]
         public IActionResult Listar()
         {
-            List<ClienteDomain> listaClientes = _clienteRepository.ListarTodos();
+            try
+            {
+                List<ClienteDomain> listaClientes = _clienteRepository.ListarTodos();
 
-            return Ok(listaClientes);
+                return Ok(listaClientes);
+            }
+            catch (Exception codErro)
+            {
+
+                return BadRequest(codErro);
+            }
+            
         }
 
         [HttpGet("{id}")]

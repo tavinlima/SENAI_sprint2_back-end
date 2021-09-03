@@ -313,7 +313,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"idVeiculo\": 4,\r\n    \"idCliente\": 2,\r\n    \"dataEmprestimo\": \"2021-01-07\",\r\n    \"dataDevolucao\": \"2021-02-09\"\r\n}",
+							"raw": "{\r\n    \"idVeiculo\": 4,\r\n    \"idCliente\": 2,\r\n    \"dataEmprestimo\": \"2021-01-11\",\r\n    \"dataDevolucao\": \"2021-02-03\",\r\n    \"modelo\": {\r\n        \"nomeModelo\": \"FIAT\",\r\n        \"marca\": {\r\n            \"nomeMarca\": \"HONDA\"\r\n        }\r\n    }\r\n\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -342,7 +342,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"idVeiculo\" : 4,\r\n    \"idCliente\" : 6,\r\n    \"dataEmprestimo\" : \"2021-01-10\",\r\n    \"dataDevolucao\" : \"2021-02-09\",\r\n    \"idAluguel\" : 28\r\n}",
+							"raw": "{\r\n    \"idVeiculo\": 4,\r\n    \"idCliente\": 6,\r\n    \"dataEmprestimo\": \"2021-01-10\",\r\n    \"dataDevolucao\": \"2021-02-09\",\r\n    \"idAluguel\": 25\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -370,7 +370,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5000/api/alugueis/deletar/26",
+							"raw": "http://localhost:5000/api/alugueis/deletar/35",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -380,7 +380,7 @@
 								"api",
 								"alugueis",
 								"deletar",
-								"26"
+								"35"
 							]
 						}
 					},

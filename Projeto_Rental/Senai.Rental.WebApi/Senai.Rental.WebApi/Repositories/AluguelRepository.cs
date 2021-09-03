@@ -128,7 +128,7 @@ namespace Senai.Rental.WebApi.Repositories
 
             using (SqlConnection con = new SqlConnection(stringConexao))
             {
-                string querySelectAll = @"SELECT idAluguel, idVeiculo, dataEmpresetimo, dataDevolucao, nomeCliente, nomeModelo, nomeMarca 
+                string querySelectAll = @"SELECT idAluguel, idVeiculo, dataEmpresetimo, dataDevolucao, nomeCliente, sobrenomeCliente, nomeModelo, nomeMarca 
                                           FROM ALUGUEL
                                           INNER JOIN CLIENTE
                                           ON ALUGUEL.idCliente = CLIENTE.idCliente
@@ -157,13 +157,14 @@ namespace Senai.Rental.WebApi.Repositories
                             cliente = new ClienteDomain
                             {
                                 nomeCliente = (rdr[4]).ToString(),
+                                sobrenomeCliente = (rdr[5]).ToString(),
                             },
                             modelo = new ModeloDomain
                             {
-                                nomeModelo = (rdr[5]).ToString(),
+                                nomeModelo = (rdr[6]).ToString(),
                                 marca = new MarcaDomain
                                 {
-                                    nomeMarca = (rdr[6]).ToString()
+                                    nomeMarca = (rdr[7]).ToString()
                                 }
                             }
                         };
